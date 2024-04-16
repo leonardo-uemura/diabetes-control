@@ -1,0 +1,18 @@
+core/db.sqlite3
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore virtual environment directories (e.g., for virtualenv, pipenv)
+venv/
+env/
+.venv/
+pipenv/
+
+# Ignore IDE/editor specific files and directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
