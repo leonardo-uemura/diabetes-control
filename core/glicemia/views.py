@@ -27,6 +27,12 @@ class GlicemiaViewSet(viewsets.ModelViewSet):
     serializer_class = GlicemiaSerializer
     permission_classes = [permissions.IsAuthenticated]  # Require authenticated user
 
+    def get_serializer_context(self):
+        # Pass request object to serializer context
+        context = super().get_serializer_context()
+        context.update({'request': self.request})
+        return context
+
     # Optional: Customize queryset based on user (e.g., show only user's data)
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)

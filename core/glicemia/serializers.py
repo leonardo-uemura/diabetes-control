@@ -14,13 +14,15 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class GlicemiaSerializer(serializers.ModelSerializer):
-    user_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='user')
-
     class Meta:
         model = Glicemia
-        fields = ['id', 'time', 'value', 'title', 'description', 'created_at', 'user_id']
+        fields = ['id', 'time', 'value', 'title', 'description', 'created_at']
+        read_only_fields = ['created_at']  # Mark 'created_at' field as read-only
 
     def create(self, validated_data):
-        user = validated_data.pop('user')  # Get the 'user' instance from validated_data
+        # Get the authenticated user from the request context
+        user = self.context['request'].user
+
+        # Create the 'Glicemia' instance with the authenticated user
         glicemia = Glicemia.objects.create(user=user, **validated_data)
         return glicemia
