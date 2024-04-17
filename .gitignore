@@ -8,6 +8,7 @@ __pycache__/
 # Ignore virtual environment directories (e.g., for virtualenv, pipenv)
 venv/
 env/
+.env
 .venv/
 pipenv/
 
